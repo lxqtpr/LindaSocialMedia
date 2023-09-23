@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 volumes:
   cache:
@@ -9,6 +9,7 @@ volumes:
     driver: local
 
 services:
+
   api:
     container_name: 'lindaApi'
     build: ./
@@ -19,10 +20,8 @@ services:
       - pgadmin
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/linda
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: lxqtpr2021
 
@@ -33,7 +32,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=lxqtpr2021
-      - POSTGRES_DB= linda
     volumes:
       - db-data:/postgres
 
@@ -51,7 +49,7 @@ services:
     restart: always
     container_name: redis
     ports:
-      - 6379:6379
+      - "6379:6379"
     volumes:
       - cache:/data
 
