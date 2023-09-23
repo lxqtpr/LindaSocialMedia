@@ -1,0 +1,26 @@
+server:
+  servlet:
+    context-path: "/api"
+spring:
+  devtools:
+    restart:
+      log-condition-evaluation-delta: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: lxqtpr2021
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+        show_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+        hbm2ddl:
+          auto: update
+minio:
+  bucket: images
+  url: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
