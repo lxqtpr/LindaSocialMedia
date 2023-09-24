@@ -1,21 +1,44 @@
 package dev.lxqtpr.lindaSocialMedia.Domain.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import dev.lxqtpr.lindaSocialMedia.Domain.Comment.CommentEntity;
+import dev.lxqtpr.lindaSocialMedia.Domain.Role.RoleEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Set;
 
 
+@Entity
 @Getter
 @Setter
-@ToString
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    String username;
+    String password;
+    String name;
+    String avatar;
+    String city;
+    String pageCover;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Set<RoleEntity> roles;
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    ArrayList<CommentEntity> comments;
+
+    Boolean isVerified;
+
+    String email;
 }

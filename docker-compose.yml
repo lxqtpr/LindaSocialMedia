@@ -7,6 +7,8 @@ volumes:
     driver: local
   minio-data:
     driver: local
+  pgAdmin-data:
+    driver: local
 
 services:
 
@@ -22,8 +24,6 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: lxqtpr2021
 
   postgres:
     image: postgres
@@ -43,6 +43,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: lxqtpr2021
     ports:
       - "5050:80"
+    volumes:
+      - pgAdmin-data:/pgadmin
 
   redis:
     image: redis:7.2-rc-alpine
