@@ -3,6 +3,9 @@ package dev.lxqtpr.lindaSocialMedia.Domain.User;
 import dev.lxqtpr.lindaSocialMedia.Domain.Comment.CommentEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Role.RoleEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.Set;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     String username;
     String password;

@@ -1,11 +1,11 @@
-package dev.lxqtpr.lindaSocialMedia.Domain.PictureAuthor;
+package dev.lxqtpr.lindaSocialMedia.Domain.Artist;
 
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
+import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
-public class PictureAuthorEntity {
+public class ArtistEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -24,10 +24,10 @@ public class PictureAuthorEntity {
     String lastName;
 
     @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
-    private Date birthDay;
+    Date birthdate;
 
     @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
-    private Date deathdate;
+    Date deathdate;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -35,7 +35,6 @@ public class PictureAuthorEntity {
 
     String portrait;
 
-    @CollectionTable(name = "author_files")
-    @ElementCollection(fetch = FetchType.EAGER)
-    ArrayList<String> pictures;
+    @OneToMany(mappedBy = "artist")
+    ArrayList<PictureEntity> pictures;
 }

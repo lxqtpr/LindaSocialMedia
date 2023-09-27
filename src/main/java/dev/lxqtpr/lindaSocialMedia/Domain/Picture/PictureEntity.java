@@ -1,26 +1,24 @@
-package dev.lxqtpr.lindaSocialMedia.Domain.Country;
+package dev.lxqtpr.lindaSocialMedia.Domain.Picture;
 
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CountryEntity {
+@Entity
+public class PictureEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String name;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    ArtistEntity artist;
 
     String image;
 
-    @OneToMany(mappedBy = "country")
-    ArrayList<ArtistEntity> authors;
 }

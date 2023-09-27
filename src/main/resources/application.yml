@@ -15,8 +15,9 @@ spring:
       hibernate:
         show_sql: true
         hbm2ddl:
-          auto: update
-        ddl-auto: update
+          auto: validate
+          ddl-auto: validate
+    generate-ddl: false
 minio:
   bucket: images
   url: http://localhost:9000
