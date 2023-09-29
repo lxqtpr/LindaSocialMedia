@@ -1,7 +1,5 @@
 create table artist_entity (
      id bigserial not null,
-     birthdate timestamp(6),
-     deathdate timestamp(6),
      country_id bigint,
      first_name varchar(255),
      last_name varchar(255),
@@ -16,6 +14,7 @@ create table country_entity (
 );
 create table picture_entity (
     artist_id bigint,
+    createdAtAge int,
     id bigserial not null,
      image varchar(255),
       primary key (id)

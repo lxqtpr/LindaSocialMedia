@@ -2,6 +2,12 @@ server:
   servlet:
     context-path: "/api"
 spring:
+  flyway:
+    driver-class-name: org.postgresql.Driver
+    user: postgres
+    password: lxqtpr2021
+    url: jdbc:postgresql://localhost:5432/postgres
+    baseline-on-migrate: true
   devtools:
     restart:
       log-condition-evaluation-delta: false
@@ -14,9 +20,7 @@ spring:
     properties:
       hibernate:
         show_sql: true
-        hbm2ddl:
-          auto: validate
-          ddl-auto: validate
+        ddl-auto: validate
     generate-ddl: false
 minio:
   bucket: images

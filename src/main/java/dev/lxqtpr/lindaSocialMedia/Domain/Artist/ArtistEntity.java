@@ -4,9 +4,12 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 @Getter
@@ -23,18 +26,12 @@ public class ArtistEntity {
     String firstName;
     String lastName;
 
-    @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
-    Date birthdate;
-
-    @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
-    Date deathdate;
-
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "country_id")
     CountryEntity country;
 
     String portrait;
 
     @OneToMany(mappedBy = "artist")
-    ArrayList<PictureEntity> pictures;
+    List<PictureEntity> pictures;
 }

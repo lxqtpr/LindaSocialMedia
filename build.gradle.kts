@@ -28,6 +28,7 @@ dependencies {
 	implementation("io.minio:minio:8.5.5")
 	implementation("org.springframework.boot:spring-boot-starter-validation:3.1.4")
 	implementation("org.flywaydb:flyway-core:9.22.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	implementation("org.modelmapper:modelmapper:3.1.1")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")

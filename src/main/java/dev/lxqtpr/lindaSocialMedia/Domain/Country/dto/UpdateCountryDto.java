@@ -4,12 +4,18 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 @Data
-public class CreateCountryDto {
+public class UpdateCountryDto {
+
+    @NotNull
+    Long id;
+
     @NotBlank
     String name;
 
-    @NotNull
     MultipartFile image;
+
+    List<Long> artistsId;
 }
