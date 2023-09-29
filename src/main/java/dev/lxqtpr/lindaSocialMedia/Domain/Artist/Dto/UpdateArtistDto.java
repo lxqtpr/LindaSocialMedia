@@ -16,6 +16,6 @@ public class UpdateArtistDto {
     @NotNull
     String lastName;
 
-    @NotNull
+
     MultipartFile portrait;
 }

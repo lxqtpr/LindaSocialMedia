@@ -62,9 +62,14 @@ public record ArtistServiceImpl(
 
     @Override
     public ResponseArtistDto updateArtist(UpdateArtistDto dto) {
-        var portraitFileName = fileService.upload(dto.getPortrait());
         var artist = mapper.map(dto, ArtistEntity.class);
-        artist.setPortrait(portraitFileName);
+        if (dto.getPortrait() != null){
+            var oldArtist = artistRepository.findById(dto.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
+            fileService.deleteFile(oldArtist.getPortrait());
+            var portraitFileName = fileService.upload(dto.getPortrait());
+            artist.setPortrait(portraitFileName);
+        }
         return mapper.map(artistRepository.save(artist), ResponseArtistDto.class);
     }
 

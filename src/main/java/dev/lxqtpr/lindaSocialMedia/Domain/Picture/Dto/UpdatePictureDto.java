@@ -15,7 +15,6 @@ public class UpdatePictureDto {
     @NotNull
     String name;
 
-    @NotNull
     MultipartFile image;
 
     @NotNull

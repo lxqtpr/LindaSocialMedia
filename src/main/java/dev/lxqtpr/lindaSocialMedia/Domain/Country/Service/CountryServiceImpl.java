@@ -51,17 +51,20 @@ public record CountryServiceImpl(
 
     @Override
     public ResponseCountryDto updateCountry(UpdateCountryDto dto) {
-        var newFileName = minioService.upload(dto.getImage());
-        var oldCountry = countryRepository
-                .findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Country not found."));
-        minioService.deleteFile(oldCountry.getImage());
-        oldCountry.setImage(newFileName);
-        oldCountry.setName(dto.getName());
-        if(dto.getArtistsId() != null) {
-            oldCountry.setArtists(artistRepository.findAllById(dto.getArtistsId()));
+        var country = mapper.map(dto, CountryEntity.class);
+        if(dto.getImage() != null){
+            var newFileName = minioService.upload(dto.getImage());
+            var oldCountry = countryRepository
+                    .findById(dto.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Country not found."));
+            minioService.deleteFile(oldCountry.getImage());
+            country.setImage(newFileName);
         }
-        return mapper.map(countryRepository.save(oldCountry), ResponseCountryDto.class);
+        country.setName(dto.getName());
+        if(dto.getArtistsId() != null) {
+            country.setArtists(artistRepository.findAllById(dto.getArtistsId()));
+        }
+        return mapper.map(countryRepository.save(country), ResponseCountryDto.class);
     }
 
     @Override

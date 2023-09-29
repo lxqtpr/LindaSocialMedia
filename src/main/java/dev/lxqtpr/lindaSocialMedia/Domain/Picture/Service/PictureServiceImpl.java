@@ -55,19 +55,22 @@ public record PictureServiceImpl(
 
     @Override
     public ResponsePictureDto updatePicture(UpdatePictureDto dto) {
-        var fileName = minioService.upload(dto.getImage());
-        var oldPicture = pictureRepository
-                .findById(dto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Picture not found"));
-        minioService.deleteFile(oldPicture.getImage());
-        oldPicture.setImage(fileName);
-        oldPicture.setName(dto.getName());
+        var picture = mapper.map(dto, PictureEntity.class);
+        if (dto.getImage() != null){
+            var fileName = minioService.upload(dto.getImage());
+            var oldPicture = pictureRepository
+                    .findById(dto.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Picture not found"));
+            minioService.deleteFile(oldPicture.getImage());
+            picture.setImage(fileName);
+        }
+        picture.setName(dto.getName());
         if(dto.getArtistId() != null ){
             var artist = artistRepository
                     .findById(dto.getArtistId())
                     .orElseThrow(() -> new ResourceNotFoundException("Artist not found"));
-            oldPicture.setArtist(artist);
+            picture.setArtist(artist);
         }
-        return mapper.map(pictureRepository.save(oldPicture), ResponsePictureDto.class);
+        return mapper.map(pictureRepository.save(picture), ResponsePictureDto.class);
     }
 }
