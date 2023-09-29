@@ -19,6 +19,9 @@ public class PictureEntity {
     @JoinColumn(name = "artist_id")
     ArtistEntity artist;
 
+    String name;
+
     String image;
 
+    Integer createdAtAge;
 }

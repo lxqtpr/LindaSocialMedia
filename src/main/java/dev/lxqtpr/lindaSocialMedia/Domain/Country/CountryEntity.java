@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,5 +23,5 @@ public class CountryEntity {
     String image;
 
     @OneToMany(mappedBy = "country")
-    ArrayList<ArtistEntity> authors;
+    List<ArtistEntity> artists;
 }
