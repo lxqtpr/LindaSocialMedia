@@ -1,14 +1,14 @@
 package dev.lxqtpr.lindaSocialMedia.Domain.User;
 
 import dev.lxqtpr.lindaSocialMedia.Domain.Comment.CommentEntity;
-import dev.lxqtpr.lindaSocialMedia.Domain.Role.RoleEntity;
+import dev.lxqtpr.lindaSocialMedia.Domain.Role.UserRoleEnum;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 
@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserEntity {
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -29,19 +29,41 @@ public class UserEntity {
     String avatar;
     String city;
     String pageCover;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    Set<RoleEntity> roles;
-
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
-    ArrayList<CommentEntity> comments;
-
+    String email;
+    Set<UserRoleEnum> roles;
     Boolean isVerified;
 
-    String email;
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    ArrayList<CommentEntity> comments;
+
+    // for user details functionality
+    Boolean isAccountNonExpired;
+    Boolean isAccountNonLocked;
+    Boolean isCredentialsNonExpired;
+    Boolean isEnabled;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.isEnabled;
+    }
 }

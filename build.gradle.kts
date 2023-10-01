@@ -23,6 +23,16 @@ repositories {
 }
 
 dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+	//implementation("org.springframework.security:spring-security-core:6.1.2")
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+	//implementation("org.springframework.security:spring-security-test:6.1.0")
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security:3.1.0")
+
+
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("io.minio:minio:8.5.5")
