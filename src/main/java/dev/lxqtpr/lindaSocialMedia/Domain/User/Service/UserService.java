@@ -16,7 +16,7 @@ public class UserService {
 
     public UserEntity loadUserByUsername(String username) {
         return this.userRepository.findUserEntityByUsername(username).orElseThrow(() ->
-                new ResourceNotFoundException("User with username="+username+" is not found!"));
+                new ResourceNotFoundException("User with username='"+username+"' is not found!"));
     }
 
     public boolean isUserWithUsernameExists(String username) {
