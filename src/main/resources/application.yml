@@ -28,6 +28,5 @@ minio:
   accessKey: minioadmin
   secretKey: minioadmin
 
-rsa:
-  private-key: classpath:certs/private.pem
-  public-key: classpath:certs/public.pem
+rsa.private-key: classpath:certs/private.pem
+rsa.public-key: classpath:certs/public.pem
