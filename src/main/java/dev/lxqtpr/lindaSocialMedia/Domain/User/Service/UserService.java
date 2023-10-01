@@ -22,4 +22,12 @@ public class UserService {
     public boolean isUserWithUsernameExists(String username) {
         return this.userRepository.findUserEntityByUsername(username).isPresent();
     }
+
+    public UserEntity saveUserEntity(UserEntity userEntity) {
+        return this.userRepository.saveAndFlush(userEntity);
+    }
+
+    public void deleteUserById(Long id) {
+        this.userRepository.deleteById(id);
+    }
 }

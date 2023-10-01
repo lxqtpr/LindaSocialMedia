@@ -23,15 +23,21 @@ repositories {
 }
 
 dependencies {
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
-	//implementation("org.springframework.security:spring-security-core:6.1.2")
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
-	//implementation("org.springframework.security:spring-security-test:6.1.0")
 
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
 	implementation("org.springframework.boot:spring-boot-starter-security:3.1.0")
 
+	// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
+	implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE")
 
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-resource-server
+	implementation("org.springframework.security:spring-security-oauth2-resource-server:6.1.2")
+
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-jose
+	implementation("org.springframework.security:spring-security-oauth2-jose:6.1.2")
+
+	// https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
+	implementation("com.nimbusds:nimbus-jose-jwt:9.31")
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
