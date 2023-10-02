@@ -4,6 +4,7 @@ import dev.lxqtpr.lindaSocialMedia.Core.Services.MinioService;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistController;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistRepository;
+import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Dto.ResponseArtistDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Service.ArtistServiceImpl;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryRepository;
 import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureRepository;
@@ -65,9 +66,27 @@ public class ArtistControllerTest {
         Assertions.assertThat(savedArtist.getLastName()).isEqualTo(testObject.getArtistJoe().getLastName());
         Assertions.assertThat(savedArtist.getId()).isEqualTo(testObject.getArtistJoe().getId());
         Assertions.assertThat(savedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
-        Assertions.assertThat(savedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
 
 
     }
 
+    @Test
+    public void testGetId(){
+        when(mockMinioService.upload(any(MultipartFile.class)))
+                .thenReturn(
+                        testObject.getArtistJoeCreateDto().getPortrait().getName()
+                );
+
+        countryRepository.save(testObject.Wales);
+        artistRepository.save(testObject.getArtistJoe());
+
+        ResponseArtistDto getSavedArtist = artistController.getArtistById(1L).getBody();
+        assert getSavedArtist != null;
+        Assertions.assertThat(getSavedArtist.getFirstName()).isEqualTo(testObject.getArtistJoe().getFirstName());
+        Assertions.assertThat(getSavedArtist.getPortrait()).isEqualTo(testObject.getArtistJoe().getPortrait());
+        Assertions.assertThat(getSavedArtist.getLastName()).isEqualTo(testObject.getArtistJoe().getLastName());
+        Assertions.assertThat(getSavedArtist.getId()).isEqualTo(testObject.getArtistJoe().getId());
+        //Assertions.assertThat(getSavedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
+
+    }
 }
