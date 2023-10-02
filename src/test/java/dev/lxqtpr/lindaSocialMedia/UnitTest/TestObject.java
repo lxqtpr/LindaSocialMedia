@@ -5,6 +5,8 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Dto.CreateArtistDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureEntity;
+import lombok.Getter;
+import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +19,9 @@ import java.util.List;
 
 public class TestObject {
     private final ModelMapperConfig modelMapper = new ModelMapperConfig();
+    public ModelMapper getModelMapper(){
+        return this.modelMapper.modelMapper();
+    }
     // ARTIST JOE OBJECT // ARTIST JOE OBJECT // ARTIST JOE OBJECT // ARTIST JOE OBJECT
 
     List<ArtistEntity> artistEntityList = new ArrayList<>();
@@ -40,15 +45,10 @@ public class TestObject {
                 "avatar",
                 null
     );
-        Path path = Paths.get("C:\\Windows\\workspace\\LinuxSHIT\\lindaSocialMedia\\src\\test\\resources\\avatar.png");
-        String name = "avatar.png";
+        String name = "avatar";
         String originalFileName = "avatar.png";
         String contentType = "image/png";
         byte[] content = null;
-        try {
-            content = Files.readAllBytes(path);
-        } catch (final IOException e) {
-        }
         mockedMultipartFile = new MockMultipartFile(name,
                 originalFileName, contentType, content);
         mockedMultipartFile.getOriginalFilename();
@@ -57,6 +57,9 @@ public class TestObject {
         CreateArtistDto artistJoeCreateDto = modelMapper.modelMapper().map(artistJoe,CreateArtistDto.class);
         artistJoeCreateDto.setPortrait(mockedMultipartFile);
         return artistJoeCreateDto;
+    }
+    public ArtistEntity getArtistJoe(){
+        return this.artistJoe;
     }
 
 }
