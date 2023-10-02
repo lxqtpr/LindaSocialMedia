@@ -17,7 +17,7 @@ public class UserDefaultCreationDto implements UserDetails {
     @NotBlank
     @Length(min = 5, max = 20)
     private final String username;
-    @NotNull
+    @NotBlank
     @Length(min = 8, max = 20)
     private final String password;
 

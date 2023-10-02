@@ -4,12 +4,12 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Comment.CommentEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Role.UserRoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -18,53 +18,76 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@ToString
+@ToString(of = {"id", "username"})
+@EqualsAndHashCode(of = {"id", "username"})
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String username;
-    String password;
-    String name;
-    String avatar;
-    String city;
-    String pageCover;
-    String email;
-    Set<UserRoleEnum> roles;
-    Boolean isVerified;
+    // todo: SHOULD BE UNIQUE!!!
+    @Column(name = "username")
+    private String username;
+    private String password;
+    private String name;
+    private String avatar;
+    private String city;
+    private String pageCover;
+    private String email;
+    private Set<UserRoleEnum> roles;
+    private Boolean isVerified;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    ArrayList<CommentEntity> comments;
+    @Fetch(FetchMode.SELECT)
+    private List<CommentEntity> comments;
 
     // for user details functionality
-    Boolean isAccountNonExpired;
-    Boolean isAccountNonLocked;
-    Boolean isCredentialsNonExpired;
-    Boolean isEnabled;
+    private Boolean isAccountNonExpired;
+    private Boolean isAccountNonLocked;
+    private Boolean isCredentialsNonExpired;
+    private Boolean isEnabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles;
+        return this.getRoles();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.isAccountNonExpired;
+        return isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.isAccountNonLocked;
+        return isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.isCredentialsNonExpired;
+        return isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled;
+        return isEnabled;
+    }
+
+    public UserEntity(Long id, String username, String password, String name, String avatar,
+                      String city, String pageCover, String email, Set<UserRoleEnum> roles, Boolean isVerified,
+                      Boolean isAccountNonExpired, Boolean isAccountNonLocked, Boolean isCredentialsNonExpired, Boolean isEnabled) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.avatar = avatar;
+        this.city = city;
+        this.pageCover = pageCover;
+        this.email = email;
+        this.roles = roles;
+        this.isVerified = isVerified;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
     }
 }

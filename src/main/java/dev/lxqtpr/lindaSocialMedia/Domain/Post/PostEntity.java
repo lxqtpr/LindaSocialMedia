@@ -18,7 +18,7 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     UserEntity author;
 
@@ -28,6 +28,6 @@ public class PostEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     ArrayList<String> files;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     ArrayList<CommentEntity> comments;
 }

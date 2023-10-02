@@ -39,6 +39,12 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
 	implementation("com.nimbusds:nimbus-jose-jwt:9.31")
 
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+	implementation("org.hibernate:hibernate-core:6.2.5.Final")
+
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational
+	implementation("org.springframework.data:spring-data-relational:3.1.3")
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("io.minio:minio:8.5.5")
@@ -46,6 +52,7 @@ dependencies {
 	implementation("org.flywaydb:flyway-core:9.22.2")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	implementation("org.modelmapper:modelmapper:3.1.1")
+	testImplementation("junit:junit:4.13.1")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

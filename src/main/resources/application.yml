@@ -10,7 +10,7 @@ spring:
     baseline-on-migrate: true
   devtools:
     restart:
-      log-condition-evaluation-delta: false
+      log-condition-evaluation-delta: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/linda
@@ -30,3 +30,5 @@ minio:
 
 rsa.private-key: classpath:certs/private.pem
 rsa.public-key: classpath:certs/public.pem
+
+
