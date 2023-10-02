@@ -43,7 +43,7 @@ public class TestObject {
                 "Joe","Walsh",
                 Wales,
                 "avatar",
-                null
+                new ArrayList<PictureEntity>()
     );
         String name = "avatar";
         String originalFileName = "avatar.png";

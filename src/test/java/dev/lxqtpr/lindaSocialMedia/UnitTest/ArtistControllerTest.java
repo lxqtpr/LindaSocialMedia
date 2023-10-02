@@ -72,11 +72,6 @@ public class ArtistControllerTest {
 
     @Test
     public void testGetId(){
-        when(mockMinioService.upload(any(MultipartFile.class)))
-                .thenReturn(
-                        testObject.getArtistJoeCreateDto().getPortrait().getName()
-                );
-
         countryRepository.save(testObject.Wales);
         artistRepository.save(testObject.getArtistJoe());
 
@@ -87,6 +82,17 @@ public class ArtistControllerTest {
         Assertions.assertThat(getSavedArtist.getLastName()).isEqualTo(testObject.getArtistJoe().getLastName());
         Assertions.assertThat(getSavedArtist.getId()).isEqualTo(testObject.getArtistJoe().getId());
         //Assertions.assertThat(getSavedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
+
+    }
+
+
+    @Test
+    public void testDeleteId(){
+        countryRepository.save(testObject.Wales);
+        artistRepository.save(testObject.getArtistJoe());
+        String getResponse = artistController.deleteArtist(1L).getBody();
+        Assertions.assertThat(getResponse).isEqualTo("Country deleted");
+        Assertions.assertThat(artistRepository.count()).isEqualTo(0);
 
     }
 }
