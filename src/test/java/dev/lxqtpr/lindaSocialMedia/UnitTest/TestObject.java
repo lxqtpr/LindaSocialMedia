@@ -39,7 +39,7 @@ public class TestObject {
         Wales.setImage("WalesFlag");
 
         artistJoe = new ArtistEntity(
-                1L,
+                null,
                 "Joe","Walsh",
                 Wales,
                 "avatar",

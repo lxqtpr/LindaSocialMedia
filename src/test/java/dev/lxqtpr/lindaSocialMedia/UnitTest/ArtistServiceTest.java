@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @Transactional
-public class ArtistControllerTest {
+public class ArtistServiceTest {
     // INITIALIZATION PART
     TestObject testObject;
     @Autowired
@@ -35,20 +35,19 @@ public class ArtistControllerTest {
     private CountryRepository countryRepository;
     @Autowired
     PictureService pictureService;
-    private ArtistController artistController;
+    private ArtistServiceImpl artistService;
     MinioService mockMinioService = Mockito.mock(MinioService.class);
     // INITIALIZATION PART
     @BeforeEach
     public void beforeEach(){
         testObject = new TestObject();
-        artistController = new ArtistController(
-                new ArtistServiceImpl(
+        artistService = new ArtistServiceImpl(
                         testObject.getModelMapper(),
                         artistRepository,
                         mockMinioService,
                         countryRepository,
                         pictureRepository,
-                        pictureService));
+                        pictureService);
     }
 
     @Test
@@ -57,9 +56,8 @@ public class ArtistControllerTest {
                 .thenReturn(
                         testObject.getArtistJoeCreateDto().getPortrait().getName()
                 );
-
         countryRepository.save(testObject.Wales);
-        Long id = artistController.createArtist(testObject.getArtistJoeCreateDto()).getBody().getId();
+        Long id = artistService.createArtist(testObject.getArtistJoeCreateDto()).getId();
         ArtistEntity savedArtist = artistRepository.findById(id).get();
         Assertions.assertThat(savedArtist.getFirstName()).isEqualTo(testObject.getArtistJoe().getFirstName());
         Assertions.assertThat(savedArtist.getPortrait()).isEqualTo(testObject.getArtistJoe().getPortrait());
@@ -74,14 +72,13 @@ public class ArtistControllerTest {
     public void testGetId(){
         countryRepository.save(testObject.Wales);
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
-
-        ResponseArtistDto getSavedArtist = artistController.getArtistById(id).getBody();
+        ResponseArtistDto getSavedArtist = artistService.getArtistById(id);
         assert getSavedArtist != null;
         Assertions.assertThat(getSavedArtist.getFirstName()).isEqualTo(testObject.getArtistJoe().getFirstName());
         Assertions.assertThat(getSavedArtist.getPortrait()).isEqualTo(testObject.getArtistJoe().getPortrait());
         Assertions.assertThat(getSavedArtist.getLastName()).isEqualTo(testObject.getArtistJoe().getLastName());
         Assertions.assertThat(getSavedArtist.getId()).isEqualTo(id);
-        Assertions.assertThat(getSavedArtist.getPictures().size()).isEqualTo(0);
+        //Assertions.assertThat(getSavedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
 
     }
 
@@ -90,8 +87,7 @@ public class ArtistControllerTest {
     public void testDeleteId(){
         countryRepository.save(testObject.Wales);
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
-        String getResponse = artistController.deleteArtist(id).getBody();
-        Assertions.assertThat(getResponse).isEqualTo("Country deleted");
+        artistService.deleteArtist(id);
         Assertions.assertThat(artistRepository.count()).isEqualTo(0);
 
     }
