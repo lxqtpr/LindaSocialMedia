@@ -1,5 +1,6 @@
 package dev.lxqtpr.lindaSocialMedia.UnitTest;
 
+import dev.lxqtpr.lindaSocialMedia.Core.Exception.ResourceNotFoundException;
 import dev.lxqtpr.lindaSocialMedia.Core.Services.MinioService;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistController;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
@@ -78,17 +79,17 @@ public class ArtistServiceTest {
         Assertions.assertThat(getSavedArtist.getPortrait()).isEqualTo(testObject.getArtistJoe().getPortrait());
         Assertions.assertThat(getSavedArtist.getLastName()).isEqualTo(testObject.getArtistJoe().getLastName());
         Assertions.assertThat(getSavedArtist.getId()).isEqualTo(id);
-        //Assertions.assertThat(getSavedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
+        Assertions.assertThat(getSavedArtist.getPictures()).isEqualTo(testObject.getArtistJoe().getPictures());
 
     }
-
 
     @Test
     public void testDeleteId(){
         countryRepository.save(testObject.Wales);
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
-        artistService.deleteArtist(id);
-        Assertions.assertThat(artistRepository.count()).isEqualTo(0);
 
+        artistService.deleteArtist(id);
+
+        Assertions.assertThat(artistRepository.findById(id).orElse(null)).isEqualTo(null);
     }
 }
