@@ -1,4 +1,4 @@
-package dev.lxqtpr.lindaSocialMedia.Domain.User;
+package dev.lxqtpr.lindaSocialMedia.Domain.User.Dto;
 
 import lombok.Data;
 

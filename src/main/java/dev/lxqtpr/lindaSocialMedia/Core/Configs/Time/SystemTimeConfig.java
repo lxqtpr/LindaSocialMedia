@@ -1,4 +1,4 @@
-package dev.lxqtpr.lindaSocialMedia.Time;
+package dev.lxqtpr.lindaSocialMedia.Core.Configs.Time;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
