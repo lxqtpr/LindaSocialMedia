@@ -2,14 +2,11 @@ package dev.lxqtpr.lindaSocialMedia.UnitTest;
 
 import dev.lxqtpr.lindaSocialMedia.Core.Services.MinioService;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistRepository;
-import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Service.ArtistServiceImpl;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryRepository;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.Service.CountryServiceImpl;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.dto.CreateCountryDto;
-import dev.lxqtpr.lindaSocialMedia.Domain.Country.dto.ResponseCountryDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.dto.UpdateCountryDto;
-import dev.lxqtpr.lindaSocialMedia.Domain.Picture.Service.PictureService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @Transactional
-public class CountryService {
+public class CountryServiceTest {
     @Autowired
     private ArtistRepository artistRepository;
     @Autowired
