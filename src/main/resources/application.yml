@@ -5,25 +5,30 @@ spring:
   flyway:
     driver-class-name: org.postgresql.Driver
     user: postgres
-    password: lxqtpr2021
-    url: jdbc:postgresql://localhost:5432/postgres
+    password: password
+    url: jdbc:postgresql://localhost:5432/linda
     baseline-on-migrate: true
   devtools:
     restart:
-      log-condition-evaluation-delta: false
+      log-condition-evaluation-delta: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/linda
     username: postgres
-    password: lxqtpr2021
+    password: password
   jpa:
     properties:
       hibernate:
         show_sql: true
         ddl-auto: validate
-    generate-ddl: false
+    generate-ddl: true
 minio:
   bucket: images
   url: http://localhost:9000
   accessKey: minioadmin
   secretKey: minioadmin
+
+rsa.private-key: classpath:certs/private.pem
+rsa.public-key: classpath:certs/public.pem
+
+
