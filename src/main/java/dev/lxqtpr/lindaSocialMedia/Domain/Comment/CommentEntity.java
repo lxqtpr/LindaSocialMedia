@@ -12,21 +12,22 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = {"id", "text"})
+@EqualsAndHashCode(of = {"id", "text"})
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
-    UserEntity author;
+    private UserEntity author;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
-    PostEntity post;
+    private PostEntity post;
 
-    String text;
+    private String text;
 
     @ManyToMany
     @JoinTable(
@@ -34,5 +35,5 @@ public class CommentEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "post_id")
     )
-    Set<UserEntity> likes;
+    private Set<UserEntity> likes;
 }
