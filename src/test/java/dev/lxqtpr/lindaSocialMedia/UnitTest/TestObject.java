@@ -10,10 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +23,7 @@ public class TestObject {
     List<ArtistEntity> artistEntityList = new ArrayList<>();
     CountryEntity Wales;
     List<PictureEntity> emptyPictureEntityList = new ArrayList<PictureEntity>();
+    @lombok.Getter
     private final ArtistEntity artistJoe;
     private MultipartFile mockedMultipartFile;
 
@@ -57,9 +54,6 @@ public class TestObject {
         CreateArtistDto artistJoeCreateDto = modelMapper.modelMapper().map(artistJoe,CreateArtistDto.class);
         artistJoeCreateDto.setPortrait(mockedMultipartFile);
         return artistJoeCreateDto;
-    }
-    public ArtistEntity getArtistJoe(){
-        return this.artistJoe;
     }
 
 }
