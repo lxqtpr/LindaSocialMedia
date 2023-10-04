@@ -132,7 +132,7 @@ public class PictureServiceTest {
         Assertions.assertThat(updatedPicture.getCreatedAtAge()).isEqualTo(20024);
         Assertions.assertThat(updatedPicture.getId()).isEqualTo(id);
 
-
+        minioService.deleteFile(newImage);
 
     }
 
