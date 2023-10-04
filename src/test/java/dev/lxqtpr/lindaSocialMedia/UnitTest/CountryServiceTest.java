@@ -44,11 +44,11 @@ public class CountryServiceTest {
     @Test
     public void testCreateCountry(){
         when(mockMinioService.upload(any(MultipartFile.class)))
-                .thenReturn(testObject.Wales.getImage()
+                .thenReturn(testObject.getWales().getImage()
                 );
 
         Long id = countryService.createCountry(testObject.getModelMapper()
-                .map(testObject.Wales, CreateCountryDto.class))
+                .map(testObject.getWales(), CreateCountryDto.class))
                 .getId();
 
 
@@ -56,7 +56,7 @@ public class CountryServiceTest {
 
 
         System.out.println(savedCountry.getImage());
-        Assertions.assertThat(savedCountry.getName()).isEqualTo(testObject.Wales.getName());
+        Assertions.assertThat(savedCountry.getName()).isEqualTo(testObject.getWales().getName());
         Assertions.assertThat(savedCountry.getId()).isEqualTo(id);
         //Assertions.assertThat(savedCountry.getImage()).isEqualTo(testObject.Wales.getImage()); //MOCKITO WONT WORK!!!!
         Assertions.assertThat(savedCountry.getArtists().size()).isEqualTo(0);
@@ -65,15 +65,15 @@ public class CountryServiceTest {
 
     @Test
     public void testDeleteCountry(){
-        Long id = countryRepository.save(testObject.Wales).getId();
+        Long id = countryRepository.save(testObject.getWales()).getId();
 
         countryService.deleteCountry(id);
 
-        Assertions.assertThat(countryRepository.count()).isEqualTo(0);
+        Assertions.assertThat(countryRepository.findById(id).orElse(null)).isEqualTo(null);
     }
     @Test
     public void testGetCountry(){
-        Long id = countryRepository.save(testObject.Wales).getId();
+        Long id = countryRepository.save(testObject.getWales()).getId();
 
 
         CountryEntity getCountry = testObject.getModelMapper()
@@ -89,24 +89,24 @@ public class CountryServiceTest {
 
     @Test
     public void testUpdateCountry(){
-        Long id = countryRepository.save(testObject.Wales).getId();
+        Long id = countryRepository.save(testObject.getWales()).getId();
         String newName = "Great Britain";
         String newImage = "Great Britain Flag";
-        testObject.Wales.setImage(newImage);
-        testObject.Wales.setName(newName);
-        testObject.Wales.setId(id);
+        testObject.getWales().setImage(newImage);
+        testObject.getWales().setName(newName);
+        testObject.getWales().setId(id);
         when(mockMinioService.upload(any(MultipartFile.class)))
-                .thenReturn(testObject.Wales.getImage()
+                .thenReturn(testObject.getWales().getImage()
                 );
 
-        countryService.updateCountry(testObject.getModelMapper().map(testObject.Wales, UpdateCountryDto.class));
+        countryService.updateCountry(testObject.getModelMapper().map(testObject.getWales(), UpdateCountryDto.class));
 
         CountryEntity updatedCountry = countryRepository.findById(id).get();
 
-        Assertions.assertThat(updatedCountry.getName()).isEqualTo(testObject.Wales.getName());
-        Assertions.assertThat(updatedCountry.getId()).isEqualTo(testObject.Wales.getId());
+        Assertions.assertThat(updatedCountry.getName()).isEqualTo(testObject.getWales().getName());
+        Assertions.assertThat(updatedCountry.getId()).isEqualTo(testObject.getWales().getId());
         //Assertions.assertThat(updatedCountry.getImage()).isEqualTo(testObject.Wales.getImage()); //MOCKITO WONT WORK!!!!
-        Assertions.assertThat(updatedCountry.getArtists()).isEqualTo(testObject.Wales.getArtists());
+        Assertions.assertThat(updatedCountry.getArtists()).isEqualTo(testObject.getWales().getArtists());
 
 
 

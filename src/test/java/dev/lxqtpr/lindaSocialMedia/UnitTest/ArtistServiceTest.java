@@ -57,7 +57,7 @@ public class ArtistServiceTest {
                 .thenReturn(
                         testObject.getArtistJoeCreateDto().getPortrait().getName()
                 );
-        countryRepository.save(testObject.Wales);
+        countryRepository.save(testObject.getWales());
         Long id = artistService.createArtist(testObject.getArtistJoeCreateDto()).getId();
         ArtistEntity savedArtist = artistRepository.findById(id).get();
         Assertions.assertThat(savedArtist.getFirstName()).isEqualTo(testObject.getArtistJoe().getFirstName());
@@ -71,7 +71,7 @@ public class ArtistServiceTest {
 
     @Test
     public void testGetId(){
-        countryRepository.save(testObject.Wales);
+        countryRepository.save(testObject.getWales());
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
         ResponseArtistDto getSavedArtist = artistService.getArtistById(id);
         assert getSavedArtist != null;
@@ -85,7 +85,7 @@ public class ArtistServiceTest {
 
     @Test
     public void testDeleteId(){
-        countryRepository.save(testObject.Wales);
+        countryRepository.save(testObject.getWales());
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
 
         artistService.deleteArtist(id);
