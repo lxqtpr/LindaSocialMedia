@@ -1,13 +1,12 @@
 package dev.lxqtpr.lindaSocialMedia.Auth.Controllers;
 
+import dev.lxqtpr.lindaSocialMedia.Auth.Dto.TokensDto;
 import dev.lxqtpr.lindaSocialMedia.Auth.Service.TokenService;
+import dev.lxqtpr.lindaSocialMedia.Domain.User.Dto.UserDefaultCreationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -16,16 +15,25 @@ public class AuthController {
 
     private final TokenService tokenService;
 
-    @PostMapping("/token")
-    public String token(Authentication authentication) {
+    @PostMapping("/login")
+    public TokensDto login(@RequestBody UserDefaultCreationDto auth) {
+        return tokenService.login(auth);
+    }
 
-        return tokenService.generateToken(authentication);
+    @PostMapping("/refresh-token")
+    public String refreshToken(@RequestBody UserDefaultCreationDto auth) {
+        return tokenService.generateRefreshToken(auth);
+    }
+
+    @PostMapping("/access-token")
+    public String accessToken(JwtAuthenticationToken refreshToken) {
+        return tokenService.generateAccessToken(refreshToken);
     }
 
     // for tests
     @GetMapping("/greeting")
     public String getGreetingFromToken(JwtAuthenticationToken token) {
-
+        TokenService.checkAccessToken(token);
         return "Hello, "+token.getName()+", your ID is: "+token.getToken().getId()+"!";
     }
 }

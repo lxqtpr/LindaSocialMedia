@@ -25,14 +25,15 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // todo: SHOULD BE UNIQUE!!!
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     private String password;
     private String name;
     private String avatar;
     private String city;
     private String pageCover;
+
+    @Column(name = "email", unique = true)
     private String email;
     private Set<UserRoleEnum> roles;
     private Boolean isVerified;

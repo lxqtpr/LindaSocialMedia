@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class SystemTimeConfig {
     @Bean(name = "basicTimeZone")
     public String basicTimeZone() {
+        System.setProperty("user.timezone", "GMT");
         return "GMT";
     }
 }
