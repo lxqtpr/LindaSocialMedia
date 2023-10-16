@@ -12,28 +12,21 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"id", "text"})
-@EqualsAndHashCode(of = {"id", "text"})
+@ToString
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "author_id")
-    private UserEntity author;
+    UserEntity author;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "post_id")
-    private PostEntity post;
+    PostEntity post;
 
-    private String text;
+    String text;
 
-    @ManyToMany
-    @JoinTable(
-            name = "post_likes",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id")
-    )
-    private Set<UserEntity> likes;
+    private Long likesQuantity;
 }
