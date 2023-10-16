@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+// todo: нужна адрессация на конкретный чат, куда зашел пользователь
 @Controller
 public class ChatController {
     @MessageMapping("/chat.sendMessage")

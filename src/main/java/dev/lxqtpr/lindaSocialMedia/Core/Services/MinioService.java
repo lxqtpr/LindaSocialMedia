@@ -39,6 +39,7 @@ public class MinioService {
             return fileName;
         }
 
+    // todo: переделать, чтобы работало без этой аннотации
     @SneakyThrows
     public void deleteFile(String filename) {
         minioClient.removeObject(

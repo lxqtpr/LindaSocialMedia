@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+// todo: сделать, чтобы сообщениями обменивались юзеры только в конкретных чатах через сокет
 @Component
 @Slf4j
 @RequiredArgsConstructor
