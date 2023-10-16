@@ -38,6 +38,7 @@ public class PictureServiceTest {
     @Autowired
     PictureRepository pictureRepository;
     PictureServiceImpl pictureService;
+
     @BeforeEach
     public void BeforeEach(){
         testObject = new TestObject();
@@ -54,6 +55,9 @@ public class PictureServiceTest {
         testObject.setArtistJoe(artistJoe);
     }
 
+    // todo: ты тестируешь то, как будет добавляться новая сущность, взявшая начальные данные
+    // todo: из пришедшего с клиента DTO. Переделай через DTO которое создаешь не где-то там,
+    // todo: А ТУТ, чтобы было видно наглядно
     @Test
     public void testGetPicture(){
         var savedEntity = pictureRepository.save(testObject.getArtistJoePainting());
@@ -68,6 +72,7 @@ public class PictureServiceTest {
         Assertions.assertThat(returnedEntity.getArtist().getLastName()).isEqualTo(savedEntity.getArtist().getLastName());
     }
 
+    // todo: тоже самое
     @Test
     public void testCreatePicture() {
         PictureEntity requestedToSave = testObject.getArtistJoePainting();
