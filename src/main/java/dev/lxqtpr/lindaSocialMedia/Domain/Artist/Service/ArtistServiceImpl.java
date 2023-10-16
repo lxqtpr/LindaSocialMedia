@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// todo: переделать через пагинацию картин и
+// todo: сделать методы для возвращения художика без картин
+// todo: (в том числе и DTO для этого)
 @Service
 public record ArtistServiceImpl(
         ModelMapper mapper,
