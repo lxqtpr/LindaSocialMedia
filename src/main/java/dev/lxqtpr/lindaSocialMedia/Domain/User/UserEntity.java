@@ -25,7 +25,6 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // todo: SHOULD BE UNIQUE!!!
     @Column(name = "username")
     private String username;
     private String password;

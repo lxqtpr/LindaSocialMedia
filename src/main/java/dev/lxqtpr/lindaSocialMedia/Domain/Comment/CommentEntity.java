@@ -29,6 +29,7 @@ public class CommentEntity {
 
     private String text;
 
+    // todo: не трогай это, я переделаю просто через количество лайков
     @ManyToMany
     @JoinTable(
             name = "post_likes",
