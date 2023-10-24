@@ -15,10 +15,10 @@ import java.util.Set;
 @Data
 public class UserDefaultCreationDto implements UserDetails {
     @NotBlank
-    @Length(min = 5, max = 20)
+    @Length(min = 5, max = 30)
     private final String username;
     @NotBlank
-    @Length(min = 8, max = 20)
+    @Length(min = 8, max = 40)
     private final String password;
 
     @Deprecated

@@ -25,7 +25,11 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
+    @Column(name = "username")
+=======
     @Column(name = "username", unique = true)
+>>>>>>> AuthenticationLikesAndFriends
     private String username;
     private String password;
     private String name;
