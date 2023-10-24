@@ -66,11 +66,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-websocket:3.1.4")
 	implementation("org.modelmapper:modelmapper:3.1.1")
 	testImplementation("junit:junit:4.13.1")
-	//
-	testCompile("org.projectlombok:lombok:1.18.30")
 	testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
-	//
-	compileOnly ("org.projectlombok:lombok:1.18.30")
+	compileOnly("org.projectlombok:lombok:1.18.30")
 	annotationProcessor ("org.projectlombok:lombok:1.18.30")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
