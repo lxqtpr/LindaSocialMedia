@@ -41,11 +41,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-core
 	implementation("org.hibernate:hibernate-core:6.2.5.Final")
-
-	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational
-	implementation("org.springframework.data:spring-data-relational:3.1.3")
-
-	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis
 	implementation("org.springframework.data:spring-data-redis:3.1.2")
 
 	// https://mvnrepository.com/artifact/redis.clients/jedis
@@ -56,6 +51,8 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/redis.clients/jedis
 	implementation("redis.clients:jedis:4.4.3")
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-relational
+	implementation("org.springframework.data:spring-data-relational:3.1.3")
 
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -65,14 +62,15 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	implementation("org.springframework.boot:spring-boot-starter-websocket:3.1.4")
 	implementation("org.modelmapper:modelmapper:3.1.1")
+	implementation("org.springframework.shell:spring-shell-starter:3.1.4")
+
 	testImplementation("junit:junit:4.13.1")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
-	compileOnly("org.projectlombok:lombok:1.18.30")
-	annotationProcessor ("org.projectlombok:lombok:1.18.30")
+	compileOnly("org.projectlombok:lombok")
+	testCompileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-	annotationProcessor("org.projectlombok:lombok")
+	testAnnotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -5,6 +5,7 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Dto.CreateArtistDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureEntity;
+import dev.lxqtpr.lindaSocialMedia.Domain.User.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class TestObject {
@@ -23,16 +25,19 @@ public class TestObject {
     public ModelMapper getModelMapper(){
         return this.modelMapper.modelMapper();
     }
-    // ARTIST JOE OBJECT // ARTIST JOE OBJECT // ARTIST JOE OBJECT // ARTIST JOE OBJECT
+    // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION
 
     List<ArtistEntity> artistEntityList = new ArrayList<>();
     @Getter
     private CountryEntity Wales;
     List<PictureEntity> emptyPictureEntityList = new ArrayList<PictureEntity>();
+
     @Getter
     @Setter
     private ArtistEntity artistJoe;
-    private MultipartFile mockedMultipartFile;
+
+    @Getter
+    private MultipartFile defaultUserPng;
 
     @Getter
     @Setter
@@ -41,9 +46,15 @@ public class TestObject {
     @Getter
     private PictureEntity artistJoePainting = new PictureEntity();
 
-    public TestObject(){
+    @Getter
+    @Setter
+    private UserEntity userEntity;
+    // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION // OBJECTS INITIATION
 
-        // ARTIST JOE INIT // ARTIST JOE INIT // ARTIST JOE INIT // ARTIST JOE INIT
+    public TestObject(){
+        // OBJECTS INITIALIZATION
+//wales - country  |  Joe - artist
+
         Wales = new CountryEntity();
         Wales.setId(1L);
         Wales.setName("Wales");
@@ -53,21 +64,26 @@ public class TestObject {
                 null,
                 "Joe","Walsh",
                 Wales,
-                "avatar",
+                "user",
                 new ArrayList<PictureEntity>()
     );
-        String name = "avatar";
-        String originalFileName = "avatar.png";
+// mocked - user img
+        String name = "user";
+        String originalFileName = "user.png";
         String contentType = "image/png";
-        byte[] content = null;
-        mockedMultipartFile = new MockMultipartFile(name,
+        byte[] content;
+        try {content = Files.readAllBytes(Path.of("src/test/resources/user.png"));}
+        catch (Exception e){throw new RuntimeException(e);}
+        defaultUserPng = new MockMultipartFile(name,
                 originalFileName, contentType, content);
-        mockedMultipartFile.getOriginalFilename();
+        defaultUserPng.getOriginalFilename();
+// joe - painting
 
         artistJoePainting.setArtist(artistJoe);
         artistJoePainting.setName("ORANGE");
         artistJoePainting.setImage("NO IMAGE");
         artistJoePainting.setCreatedAtAge(20023);
+// mocked - painting img
         byte[] minecraftPicture;
         try {minecraftPicture = Files.readAllBytes(Path.of("src/test/resources/minecraftpicture.jpg"));}
         catch (IOException e) {throw new RuntimeException(e);}
@@ -76,11 +92,30 @@ public class TestObject {
                 "minecraftpicture.jpg",
                 "image/jpg",
                 minecraftPicture);
+// BRUNO - User entity
 
+        userEntity = new UserEntity();
+        userEntity.setPageCover("temperately_not");
+        userEntity.setAvatar("temperately_not");
+
+        userEntity.setIsEnabled(true);
+        userEntity.setIsAccountNonLocked(true);
+        userEntity.setIsCredentialsNonExpired(true);
+        userEntity.setIsAccountNonExpired(true);
+        userEntity.setIsVerified(true);
+
+        userEntity.setUsername("BRUNO_2005__TEST__OBJECT");
+        userEntity.setName("OLD_BRUNO__TEST__OBJECT");
+        userEntity.setEmail("bruno__TEST__OBJECT@mail.com");
+        userEntity.setCity("Saint-PetersBurg");
+        userEntity.setPassword("lxqptr");
+
+        userEntity.setComments(new ArrayList<>());
+        userEntity.setRoles(new HashSet<>());
     }
     public CreateArtistDto getArtistJoeCreateDto(){
         CreateArtistDto artistJoeCreateDto = modelMapper.modelMapper().map(artistJoe,CreateArtistDto.class);
-        artistJoeCreateDto.setPortrait(mockedMultipartFile);
+        artistJoeCreateDto.setPortrait(defaultUserPng);
         return artistJoeCreateDto;
     }
 

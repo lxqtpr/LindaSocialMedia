@@ -1,17 +1,16 @@
 package dev.lxqtpr.lindaSocialMedia.Domain.User;
 
 import dev.lxqtpr.lindaSocialMedia.Auth.Service.UserDetailsManagerImpl;
+import dev.lxqtpr.lindaSocialMedia.Domain.Role.UserRoleEnum;
 import dev.lxqtpr.lindaSocialMedia.Domain.User.Dto.UserDefaultCreationDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.User.Service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.shell.standard.ShellOption;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/users")
-@RestController
+
+@RestController@RequestMapping("/users")
 public record UserController(
         UserService userService,
         UserDetailsManagerImpl detailsManager) {
@@ -27,4 +26,5 @@ public record UserController(
 
         return ResponseEntity.status(HttpStatus.OK).body("User created!");
     }
+
 }

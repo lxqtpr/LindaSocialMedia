@@ -40,7 +40,7 @@ public class CountryServiceTest {
                 artistRepository
         );
     }
-
+    // todo:  to force to work MOCKITO
     @Test
     public void testCreateCountry(){
         when(mockMinioService.upload(any(MultipartFile.class)))

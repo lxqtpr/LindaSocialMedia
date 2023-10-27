@@ -2,7 +2,6 @@ package dev.lxqtpr.lindaSocialMedia.UnitTest;
 
 import dev.lxqtpr.lindaSocialMedia.Core.Exception.ResourceNotFoundException;
 import dev.lxqtpr.lindaSocialMedia.Core.Services.MinioService;
-import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistController;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistRepository;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Dto.ResponseArtistDto;
@@ -13,7 +12,6 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Picture.Service.PictureService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,7 +48,7 @@ public class ArtistServiceTest {
                         pictureRepository,
                         pictureService);
     }
-
+    // todo: research
     @Test
     public void testCreate(){
         when(mockMinioService.upload(any(MultipartFile.class)))
@@ -92,4 +90,5 @@ public class ArtistServiceTest {
 
         Assertions.assertThat(artistRepository.findById(id).orElse(null)).isEqualTo(null);
     }
+
 }
