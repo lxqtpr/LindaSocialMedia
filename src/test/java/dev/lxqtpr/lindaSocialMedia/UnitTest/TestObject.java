@@ -5,7 +5,6 @@ import dev.lxqtpr.lindaSocialMedia.Domain.Artist.ArtistEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Artist.Dto.CreateArtistDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.Country.CountryEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Picture.PictureEntity;
-import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +22,6 @@ public class TestObject {
     List<ArtistEntity> artistEntityList = new ArrayList<>();
     CountryEntity Wales;
     List<PictureEntity> emptyPictureEntityList = new ArrayList<PictureEntity>();
-    @lombok.Getter
     private final ArtistEntity artistJoe;
     private MultipartFile mockedMultipartFile;
 
@@ -56,4 +54,7 @@ public class TestObject {
         return artistJoeCreateDto;
     }
 
+    public ArtistEntity getArtistJoe() {
+        return artistJoe;
+    }
 }

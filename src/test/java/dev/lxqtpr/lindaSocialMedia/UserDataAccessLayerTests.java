@@ -1,7 +1,7 @@
 package dev.lxqtpr.lindaSocialMedia;
 
-import dev.lxqtpr.lindaSocialMedia.Auth.Service.UserDetailsManagerImpl;
-import dev.lxqtpr.lindaSocialMedia.Domain.User.UserDefaultCreationDto;
+import dev.lxqtpr.lindaSocialMedia.Authentication.Service.UserDetailsManagerImpl;
+import dev.lxqtpr.lindaSocialMedia.Domain.User.dto.UserDefaultCreationDto;
 import dev.lxqtpr.lindaSocialMedia.Domain.User.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

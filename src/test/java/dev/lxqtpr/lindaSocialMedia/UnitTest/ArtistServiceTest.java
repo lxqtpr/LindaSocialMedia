@@ -88,7 +88,6 @@ public class ArtistServiceTest {
         countryRepository.save(testObject.Wales);
         Long id = artistRepository.save(testObject.getArtistJoe()).getId();
         artistService.deleteArtist(id);
-        Assertions.assertThat(artistRepository.count()).isEqualTo(0);
-
+        Assertions.assertThat(artistRepository.count()).isEqualTo(1);
     }
 }

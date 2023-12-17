@@ -107,9 +107,5 @@ public class CountryServiceTest {
         Assertions.assertThat(updatedCountry.getId()).isEqualTo(testObject.Wales.getId());
         //Assertions.assertThat(updatedCountry.getImage()).isEqualTo(testObject.Wales.getImage()); //MOCKITO WONT WORK!!!!
         Assertions.assertThat(updatedCountry.getArtists()).isEqualTo(testObject.Wales.getArtists());
-
-
-
-
     }
 }

@@ -1,7 +1,8 @@
 package dev.lxqtpr.lindaSocialMedia.Domain.User;
 
-import dev.lxqtpr.lindaSocialMedia.Auth.Service.UserDetailsManagerImpl;
+import dev.lxqtpr.lindaSocialMedia.Authentication.Service.UserDetailsManagerImpl;
 import dev.lxqtpr.lindaSocialMedia.Domain.User.Service.UserService;
+import dev.lxqtpr.lindaSocialMedia.Domain.User.dto.UserDefaultCreationDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

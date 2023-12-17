@@ -2,6 +2,7 @@ package dev.lxqtpr.lindaSocialMedia.Domain.User;
 
 import dev.lxqtpr.lindaSocialMedia.Domain.Comment.CommentEntity;
 import dev.lxqtpr.lindaSocialMedia.Domain.Role.UserRoleEnum;
+import dev.lxqtpr.lindaSocialMedia.Domain.Chat.ChatEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -34,6 +35,15 @@ public class UserEntity implements UserDetails {
     private String city;
     private String pageCover;
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "rooms_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
+    Set<ChatEntity> rooms;
+
+    @ElementCollection
     private Set<UserRoleEnum> roles;
     private Boolean isVerified;
 
